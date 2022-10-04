@@ -14,13 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Logout = exports.Login = exports.Register = void 0;
 const user_model_1 = __importDefault(require("../models/user.model"));
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const errors_1 = require("./../utils/errors");
-const CreateToken = (id) => {
-    return jsonwebtoken_1.default.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: 3 * 24 * 60 * 60,
-    });
-};
 const Register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password, firstname, lastname } = req.body;
     try {
@@ -63,4 +57,4 @@ const Logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(200).json({ message: "Logout" });
 });
 exports.Logout = Logout;
-//# sourceMappingURL=auth.controller.js.map
+//# sourceMappingURL=user.controller.js.map

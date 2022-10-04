@@ -37,7 +37,7 @@ export const Login = async (req: Request, res: Response) => {
     res.status(200).json({ user: user._id });
   } catch (err) {
     const errors = signInErrors(err);
-    res.status(400).json({ err });
+    res.status(400).json({ errors });
   }
 };
 
