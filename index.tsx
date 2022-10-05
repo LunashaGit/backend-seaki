@@ -4,10 +4,15 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import UserRoutes from "./routes/user.routes";
 import { checkUser, requireAuth } from "./middleware/auth.middleware";
-
+import { server } from "./graphQL/server";
+import { database } from "./config/db";
 dotenv.config({ path: "./config/.env" });
 
-require("./config/db");
+server.listen({ port: process.env.PORT })
+.then(res=> {
+    console.log(`Server Apollo is running on ${process.env.PORT}`)
+    database();
+})
 
 const app: Express = express();
 const corsOptions = {
@@ -32,6 +37,3 @@ app.get("/jwtid", requireAuth, (req, res) => {
 
 app.use("/api/user", UserRoutes);
 
-app.listen(process.env.PORT, () => {
-  console.log("Listen " + process.env.PORT);
-});

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-mongoose
+const database = () => {
+ mongoose
     .connect('mongodb+srv://'
     + process.env.GROUP
     + ':'
@@ -16,3 +17,6 @@ mongoose
     .catch((err) => {
     console.log("[server]: Failed to connect to MongoDB", err);
     });
+  }
+
+export { database };

@@ -9,8 +9,14 @@ const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const auth_middleware_1 = require("./middleware/auth.middleware");
+const server_1 = require("./graphQL/server");
+const db_1 = require("./config/db");
 dotenv_1.default.config({ path: "./config/.env" });
-require("./config/db");
+server_1.server.listen({ port: process.env.PORT })
+    .then(res => {
+    console.log(`Server Apollo is running on ${process.env.PORT}`);
+    (0, db_1.database)();
+});
 const app = (0, express_1.default)();
 const corsOptions = {
     origin: process.env.CLIENT_URL,
@@ -29,7 +35,4 @@ app.get("/jwtid", auth_middleware_1.requireAuth, (req, res) => {
     res.status(200).send(res.locals.user._id);
 });
 app.use("/api/user", user_routes_1.default);
-app.listen(process.env.PORT, () => {
-    console.log("Listen " + process.env.PORT);
-});
 //# sourceMappingURL=index.js.map
