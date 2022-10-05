@@ -6,6 +6,7 @@ import UserRoutes from "./routes/user.routes";
 import { checkUser, requireAuth } from "./middleware/auth.middleware";
 import { server } from "./graphQL/server";
 import { database } from "./config/db";
+
 dotenv.config({ path: "./config/.env" });
 
 server.listen({ port: process.env.PORT })
