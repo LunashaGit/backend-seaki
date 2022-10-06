@@ -8,10 +8,20 @@ const typeDefs = gql`
         lastname: String!
         isAdmin: Boolean!
     }
-      type Query{
+    input RegisterInput{
+        email: String!
+        firstname: String!
+        lastname: String!
+        password: String!
+    }
+    type Query{
         port: String!
         getUsers: [User]
-      }
+        currentUser: User
+    }
+    type Mutation{
+        register(registerInput: RegisterInput): User!
+    } 
 `
 
 export { typeDefs };

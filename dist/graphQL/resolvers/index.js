@@ -6,7 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolvers = void 0;
 const user_1 = __importDefault(require("./user"));
 const resolvers = {
-    Query: Object.assign({ port: () => `I'm on port ${process.env.PORT}` }, user_1.default.Query)
+    Query: Object.assign({ port: () => `I'm on port ${process.env.PORT}` }, user_1.default.Query),
+    Mutation: Object.assign({}, user_1.default.Mutation)
 };
 exports.resolvers = resolvers;
 //# sourceMappingURL=index.js.map

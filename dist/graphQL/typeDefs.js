@@ -13,10 +13,20 @@ const typeDefs = (0, graphql_tag_1.default) `
         lastname: String!
         isAdmin: Boolean!
     }
-      type Query{
+    input RegisterInput{
+        email: String!
+        firstname: String!
+        lastname: String!
+        password: String!
+    }
+    type Query{
         port: String!
         getUsers: [User]
-      }
+        currentUser: User
+    }
+    type Mutation{
+        register(registerInput: RegisterInput): User!
+    } 
 `;
 exports.typeDefs = typeDefs;
 //# sourceMappingURL=typeDefs.js.map
