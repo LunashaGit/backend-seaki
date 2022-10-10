@@ -3,6 +3,7 @@ import isEmail from "validator/lib/isEmail";
 import bcrypt from "bcrypt";
 
 interface IUser extends Document {
+  _doc: any;
   email: string;
   password: string;
   firstname: string;
@@ -50,28 +51,6 @@ const UserSchema: Schema<IUserDocument> = new Schema({
     trim: true,
   },
 });
-
-UserSchema.pre("save", async function (next) {
-  if (this.isModified("password")) {
-    this.password = await bcrypt.hash(this.password, 8);
-  }
-  next();
-});
-
-UserSchema.statics.findByCredentials = async function (
-  email: string,
-  password: string
-) {
-  const user = await this.findOne({ email });
-  if (!user) {
-    throw new Error("Unable to login");
-  }
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) {
-    throw new Error("Unable to login");
-  }
-  return user;
-};
 
 const UserModel = mongoose.model<IUserDocument, IUserModel>("user", UserSchema);
 

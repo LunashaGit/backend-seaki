@@ -22,43 +22,26 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const isEmail_1 = __importDefault(require("validator/lib/isEmail"));
-const UserSchema = new mongoose_1.Schema({
-    email: {
+const EventSchema = new mongoose_1.Schema({
+    name: {
         type: String,
         required: true,
-        lowercase: true,
-        unique: true,
         trim: true,
-        validate: [isEmail_1.default],
+        maxlength: 20,
     },
-    password: {
+    date: {
+        type: Date,
+        required: true,
+    },
+    description: {
         type: String,
         required: true,
         minlength: 8,
         trim: true,
     },
-    firstname: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    lastname: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    isAdmin: {
-        type: Boolean,
-        default: false,
-        trim: true,
-    },
 });
-const UserModel = mongoose_1.default.model("user", UserSchema);
-exports.default = UserModel;
-//# sourceMappingURL=user.model.js.map
+const EventModel = mongoose_1.default.model("Event", EventSchema);
+exports.default = EventModel;
+//# sourceMappingURL=calendar.model.js.map
